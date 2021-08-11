@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>쿵쿵따 게임</h1>
+  <div><span id='order'>1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <script>
+    const $input=document.querySelector('input');
+    const $button=document.querySelector('button');
+    let newWord;
+
+    while(true){
+      const number=Number(prompt('몇 명 참가하나요?'));
+      if(number>0){
+        break;
+      }
+      alert('1이상의 수를 입력해주세요!');
+    }
+
+    var onInputLister=(e)=>{
+      newWord=e.target.value;
+    }
+
+    var onClcikLister=()=>{
+      let setWord=document.querySelector('#word').textContent;
+      
+      if(newWord.length==3 && (setWord=='' || setWord[setWord.length-1]==newWord[0])){
+        setWord=newWord;
+        document.querySelector('#word').textContent=setWord;
+
+      }else{
+        alert('입력한 정보가 올바르지 않습니다');
+      }
+      
+    }
+
+    $input.addEventListener('input',onInputLister);
+    $button.addEventListener('click',onClcikLister);
+
+    
+  </script>
+</body>
+</html>
