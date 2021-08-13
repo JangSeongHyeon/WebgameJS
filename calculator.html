@@ -48,6 +48,7 @@
       let numOne='';
       let operator='';
       let numTwo='';
+      let numThr='';
 
       const $operator=document.querySelector('#operator');
       const $result=document.querySelector('#result');
@@ -65,6 +66,7 @@
           $result.value='';
         }
         numTwo+=event.target.textContent;
+        
         $result.value+=event.target.textContent;
       }
 
@@ -81,6 +83,11 @@
 
       const onClickOperator=(op)=>()=>{
         if(numOne){
+          if(operator){
+            onCalculateOperator(operator);
+            numOne=$result.value;
+            numTwo='';
+          }
           operator=op;
           $operator.value=op;
         }else{
@@ -93,7 +100,8 @@
       document.querySelector('#divide').addEventListener('click',onClickOperator('/'));
       document.querySelector('#multiply').addEventListener('click',onClickOperator('*'));
 
-      document.querySelector('#calculate').addEventListener('click',()=>{
+      const onCalculateOperator=(op)=>()=>{
+        $result.value='';
         if(numTwo){
           switch(operator){
             case '+':
@@ -114,7 +122,9 @@
         }else{
           alert('숫자를 먼저 입력하세요.');
         }
-      });
+      }
+
+      document.querySelector('#calculate').addEventListener('click',onCalculateOperator(operator));
       document.querySelector('#clear').addEventListener('click',()=>{
         numOne='';
         operator='';
